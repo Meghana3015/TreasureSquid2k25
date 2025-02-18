@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Authentication</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            position: relative;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 400px;
+            border-radius: 10px;
+            position: relative;
+            z-index: 2;
+        }
+        input, button {
+            width: 92%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 98%;
+            background-color: blue;
+            color: white;
+            margin-top: 14px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkblue;
+        }
+        .shape-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .shape {
+            position: absolute;
+            opacity: 0.2;
+        }
+        .square {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            top: 10%;
+            left: 20%;
+        }
+        .circle {
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+            border-radius: 50%;
+            top: 50%;
+            left: 70%;
+        }
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-bottom: 50px solid green;
+            top: 80%;
+            left: 40%;
+        }
+    </style>
+</head>
+<body>
+    <div class="shape-overlay">
+        <div class="shape square"></div>
+        <div class="shape circle"></div>
+        <div class="shape triangle"></div>
+    </div>
+    <div class="container">
+        <h2>User Validation</h2>
+        <input type="number" id="teamNumber" placeholder="Username">
+        <input type="text" id="passkey" placeholder="Passkey">
+        <button onclick="handleLogin()">Validate</button>
+        <p id="message"></p>
+    </div>
+    <script>
+        const validTeams = {
+            1: "Campus", 2: "Lecture", 3: "Seminar", 4: "Professor", 5: "Syllabus",
+            6: "Examination", 7: "Library", 8: "Curriculum", 9: "Dormitory", 10: "Graduation",
+            11: "Research", 12: "Thesis", 13: "Scholarship", 14: "Alumni", 15: "Transcript",
+            16: "Counseling", 17: "Lecture Notes", 18: "Dean's List", 19: "Graduation Gown", 20: "Freshman",
+            21: "Sophomore", 22: "Junior", 23: "Senior", 24: "Student Union", 25: "Office Hours",
+            26: "Academic Advisor", 27: "Electives", 28: "Study Abroad", 29: "Infrastructure ", 30: "Objectives"
+        };
+
+        function handleLogin() {
+            const teamNumber = parseInt(document.getElementById("teamNumber").value, 10);
+            const passkey = document.getElementById("passkey").value.trim();
+            const messageElement = document.getElementById("message");
+            
+            if (validTeams[teamNumber] && validTeams[teamNumber].toLowerCase() === passkey.toLowerCase()) {
+                messageElement.style.color = "green";
+                messageElement.textContent = "Access granted! Explore the exciting level of the event.";
+            } else {
+                messageElement.style.color = "red";
+                messageElement.textContent = "Invalid credentials. Please try again.";
+            }
+        }
+    </script>
+</body>
+</html>
